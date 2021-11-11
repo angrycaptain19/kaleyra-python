@@ -63,8 +63,7 @@ class TxtlyRequest:
         if self.track:
             url += '&track={}'.format(self.track)
         response = Klient(url).response()
-        txtly_response = TxtlyResponse(response)
-        return txtly_response
+        return TxtlyResponse(response)
 
     def delete(self):
 
@@ -77,8 +76,7 @@ class TxtlyRequest:
         TASK = 'delete'
         url = '{}&method={}&task={}&id={}&app=1'.format(BASEURL, TxtlyRequest.TXTLY, TASK, self.id)
         response = Klient(url).response()
-        txtly_response = TxtlyResponse(response)
-        return txtly_response
+        return TxtlyResponse(response)
 
     def log(self):
 
@@ -91,8 +89,7 @@ class TxtlyRequest:
 
         url = '{}&method={}&id={}&app=1'.format(BASEURL, TxtlyRequest.LOG, self.id)
         response = Klient(url).response()
-        txtly_log_response = TxtlyLog(response)
-        return txtly_log_response
+        return TxtlyLog(response)
 
     def report(self):
 
@@ -107,5 +104,4 @@ class TxtlyRequest:
         if self.page:
             url += '&page={}'.format(self.page)
         response = Klient(url).response()
-        txtly_report_response = TxtlyReport(response)
-        return txtly_report_response
+        return TxtlyReport(response)

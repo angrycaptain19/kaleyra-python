@@ -60,8 +60,7 @@ class GroupRequest(KRequest):
             if self.email_id:
                 url += '&email={}'.format(self.email_id)
             response = Klient(url).response()
-            group_response = GroupResponse(response=response)
-            return group_response
+            return GroupResponse(response=response)
 
 
     def create(self):
@@ -78,8 +77,7 @@ class GroupRequest(KRequest):
             url = '{}&method={}&task={}&app=1&data[name]={}'.format(BASEURL, GroupRequest.GROUPS_ADD,
                                                                     GroupRequest.SAVE, self.group_name)
             response = Klient(url).response()
-            group_response = GroupResponse(response=response)
-            return group_response
+            return GroupResponse(response=response)
 
 
 
@@ -96,8 +94,7 @@ class GroupRequest(KRequest):
             url = '{}&method={}&name={}&sender={}&message={}'.format(BASEURL, GroupRequest.GROUPS, self.group_name,
                                                                      SENDERID, self.message)
             response = Klient(url).response()
-            group_response = GroupResponse(response=response)
-            return group_response
+            return GroupResponse(response=response)
 
     def send_optin(self):
 
@@ -112,5 +109,4 @@ class GroupRequest(KRequest):
             url = '{}&method={}&sender={}&message={}&name={}'.format(BASEURL, GroupRequest.OPTIN, SENDERID,
                                                                      self.message, self.group_name)
             response = Klient(url).response()
-            group_response = GroupResponse(response=response)
-            return group_response
+            return GroupResponse(response=response)
