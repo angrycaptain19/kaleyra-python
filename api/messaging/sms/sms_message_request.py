@@ -64,8 +64,7 @@ class SMSMessageRequest(KRequest):
 
         url = '{}&method={}'.format(BASEURL, SMSMessageRequest.CREDITS)
         response = Klient(url).response()
-        sms_message_response = SMSMessageResponse(response=response)
-        return sms_message_response
+        return SMSMessageResponse(response=response)
 
 
     def credit_usage(self):
@@ -82,8 +81,7 @@ class SMSMessageRequest(KRequest):
             to_date = Validate.date_validation(self.to_date, self.format)
             url = '{}&method={}&from={}&to={}'.format(BASEURL, SMSMessageRequest.USAGE, from_date, to_date)
             response = Klient(url).response()
-            sms_message_response = SMSMessageResponse(response=response)
-            return sms_message_response
+            return SMSMessageResponse(response=response)
 
 
     def delete(self):
@@ -98,8 +96,7 @@ class SMSMessageRequest(KRequest):
         url = '{}&groupid={}&task={}&method={}'.format(BASEURL, self.group_id, SMSMessageRequest.DELETE,
                                                        SMSMessageRequest.SCHEDULE)
         response = Klient(url).response()
-        sms_message_response = SMSMessageResponse(response=response)
-        return sms_message_response
+        return SMSMessageResponse(response=response)
 
 
     def edit(self):
@@ -117,8 +114,7 @@ class SMSMessageRequest(KRequest):
             url = '{}&groupid={}&time={}&task={}&method={}'.format(BASEURL, self.group_id, correct_time,
                                                                    SMSMessageRequest.MODIFY, SMSMessageRequest.SCHEDULE)
             response = Klient(url).response()
-            sms_message_response = SMSMessageResponse(response=response)
-            return sms_message_response
+            return SMSMessageResponse(response=response)
 
 
     def schedule(self):
@@ -132,22 +128,26 @@ class SMSMessageRequest(KRequest):
         requirements.
         """
 
-        if Validate.message(self.message) and Validate.number(self.to) and \
-                Validate.date_and_time_validation(self.datetime, self.format):
-            correct_time = Validate.date_and_time_validation(self.datetime, self.format)
-            url = '{}&method={}&message={}&to={}&sender={}&time={}'.format(BASEURL, SMSMessageRequest.SMS, self.message,
-                                                                           self.to, SENDERID, correct_time)
-            if self.dlr_url:
-                url += '&dlrurl={}'.format(self.dlr_url)
-            if self.custom:
-                url += '&custom={}'.format(self.custom)
-            if self.unicode:
-                url += '&unicode={}'.format(self.unicode)
-            if self.flash:
-                url += '&flash={}'.format(self.flash)
-            response = Klient(url).response()
-            sms_message_response = SMSMessageResponse(response=response)
-            return sms_message_response
+        if (
+            not Validate.message(self.message)
+            or not Validate.number(self.to)
+            or not Validate.date_and_time_validation(self.datetime, self.format)
+        ):
+            return
+
+        correct_time = Validate.date_and_time_validation(self.datetime, self.format)
+        url = '{}&method={}&message={}&to={}&sender={}&time={}'.format(BASEURL, SMSMessageRequest.SMS, self.message,
+                                                                       self.to, SENDERID, correct_time)
+        if self.dlr_url:
+            url += '&dlrurl={}'.format(self.dlr_url)
+        if self.custom:
+            url += '&custom={}'.format(self.custom)
+        if self.unicode:
+            url += '&unicode={}'.format(self.unicode)
+        if self.flash:
+            url += '&flash={}'.format(self.flash)
+        response = Klient(url).response()
+        return SMSMessageResponse(response=response)
 
 
     def send(self):
@@ -160,20 +160,21 @@ class SMSMessageRequest(KRequest):
         requirements.
         """
 
-        if Validate.message(self.message) and Validate.number(self.to):
-            url = '{}&method={}&message={}&to={}&sender={}'.format(BASEURL, SMSMessageRequest.SMS, self.message,
-                                                                   self.to, SENDERID)
-            if self.dlr_url:
-                url += '&dlrurl={}'.format(self.dlr_url)
-            if self.custom:
-                url += '&custom={}'.format(self.custom)
-            if self.unicode:
-                url += '&unicode={}'.format(self.unicode)
-            if self.flash:
-                url += '&flash={}'.format(self.flash)
-            response = Klient(url).response()
-            sms_message_response = SMSMessageResponse(response=response)
-            return sms_message_response
+        if not Validate.message(self.message) or not Validate.number(self.to):
+            return
+
+        url = '{}&method={}&message={}&to={}&sender={}'.format(BASEURL, SMSMessageRequest.SMS, self.message,
+                                                               self.to, SENDERID)
+        if self.dlr_url:
+            url += '&dlrurl={}'.format(self.dlr_url)
+        if self.custom:
+            url += '&custom={}'.format(self.custom)
+        if self.unicode:
+            url += '&unicode={}'.format(self.unicode)
+        if self.flash:
+            url += '&flash={}'.format(self.flash)
+        response = Klient(url).response()
+        return SMSMessageResponse(response=response)
 
 
     def set_schedule(self, datetime, format):
@@ -201,5 +202,4 @@ class SMSMessageRequest(KRequest):
 
         url = '{}&method={}&id={}'.format(BASEURL, SMSMessageRequest.STATUS, self.id)
         response = Klient(url).response()
-        sms_message_response = SMSMessageResponse(response=response)
-        return sms_message_response
+        return SMSMessageResponse(response=response)

@@ -77,20 +77,14 @@ class GroupResponse(KResponse):
         # SMSMessageResponse objects are created and appended to a list and the list is returned to the user.
 
         self.smsMessageResponses = []
-        dataFlag = False
-        for k, v in response.items():
-            if k == 'data':
-                dataFlag = True
-        if dataFlag:
-            if isinstance(response['data'], list):
-                pass
-            else:
-                for k, v in response['data'].items():
-                    if k == 'group_id':
-                        self.group_id = response['data']['group_id']
-                    else:
-                        smsMessageResponse = SMSMessageResponse(response=v, position=k)
-                        self.smsMessageResponses.append(smsMessageResponse)
+        dataFlag = any(k == 'data' for k, v in response.items())
+        if dataFlag and not isinstance(response['data'], list):
+            for k, v in response['data'].items():
+                if k == 'group_id':
+                    self.group_id = response['data']['group_id']
+                else:
+                    smsMessageResponse = SMSMessageResponse(response=v, position=k)
+                    self.smsMessageResponses.append(smsMessageResponse)
 
     # When the user calls the methods defined below, the above attributes are simply returned in the functions below,
     # as per the user's requirements.

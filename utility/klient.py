@@ -33,7 +33,6 @@ class Klient:
 
         try:
             response = requests.get(self.url)
-            response_json = response.json()
-            return response_json
+            return response.json()
         except Exception as e:
             print(e)
