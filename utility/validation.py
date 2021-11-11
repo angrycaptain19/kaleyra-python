@@ -165,8 +165,7 @@ class Validate:
             else:
                 time = str(val.strftime("%I:%M %p"))
                 date = str(val.date())
-                correct_val = date + ' ' + time
-                return correct_val
+                return date + ' ' + time
         except Exception as e:
             print("Error:", e)
 
@@ -723,7 +722,7 @@ class Validate:
         h = re.search(r"^(([A-Za-z]+)[- /.,](0?[1-9]|[12][0-9]|3[01])[- /.,](20)\d\d)$", date)  # mon-dd-yyyy
         i = re.search(r"^(([A-Za-z]+)[- /.,](0?[1-9]|[12][0-9]|3[01])[- /.,]([2-9][0-9]|(19)))$", date)  # mon-dd-yy
 
-        if date_format == 'dd-mm-yyyy' or date_format == 'dd.mm.yyyy' or date_format == 'dd mm yyyy' or date_format == 'dd/mm/yyyy':
+        if date_format in ['dd-mm-yyyy', 'dd.mm.yyyy', 'dd mm yyyy', 'dd/mm/yyyy']:
             if x:
                 x1 = x.string
                 date, month, year = re.split(r"[\s -/.]", x1)
@@ -733,7 +732,7 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'mm-dd-yyyy' or date_format == 'mm.dd.yyyy' or date_format == 'mm dd yyyy' or date_format == 'mm/dd/yyyy':
+        elif date_format in ['mm-dd-yyyy', 'mm.dd.yyyy', 'mm dd yyyy', 'mm/dd/yyyy']:
             if y:
                 y1 = y.string
                 month, date, year = re.split(r"[\s -/.]", y1)
@@ -743,7 +742,7 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'mm-dd-yy' or date_format == 'mm.dd.yy' or date_format == 'mm dd yy' or date_format == 'mm/dd/yy':
+        elif date_format in ['mm-dd-yy', 'mm.dd.yy', 'mm dd yy', 'mm/dd/yy']:
             if z:
                 z1 = z.string
                 month, date, year = re.split(r"[\s -/.]", z1)
@@ -754,7 +753,7 @@ class Validate:
                 return False
 
 
-        elif date_format == 'dd-mm-yy' or date_format == 'dd.mm.yy' or date_format == 'dd mm yy' or date_format == 'dd/mm/yy':
+        elif date_format in ['dd-mm-yy', 'dd.mm.yy', 'dd mm yy', 'dd/mm/yy']:
             if a:
                 a1 = a.string
                 date, month, year = re.split(r"[\s -/.]", a1)
@@ -764,7 +763,13 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'dd-mon-yy' or date_format == 'dd.mon.yy' or date_format == 'dd mon yy' or date_format == 'dd/mon/yy' or date_format == 'dd mon,yy':
+        elif date_format in [
+            'dd-mon-yy',
+            'dd.mon.yy',
+            'dd mon yy',
+            'dd/mon/yy',
+            'dd mon,yy',
+        ]:
             if b:
                 dt = parse(date)
                 std_format = str(dt.date())
@@ -773,7 +778,13 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'dd-mon-yyyy' or date_format == 'dd.mon.yyyy' or date_format == 'dd mon yyyy' or date_format == 'dd/mon/yyyy' or date_format == 'dd mon,yyyy':
+        elif date_format in [
+            'dd-mon-yyyy',
+            'dd.mon.yyyy',
+            'dd mon yyyy',
+            'dd/mon/yyyy',
+            'dd mon,yyyy',
+        ]:
             if c:
                 dt = parse(date)
                 std_format = str(dt.date())
@@ -782,7 +793,13 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'yyyy-mon-dd' or date_format == 'yyyy.mon.dd' or date_format == 'yyyy mon dd' or date_format == 'yyyy/mon/dd' or date_format == 'yyyy,mon dd':
+        elif date_format in [
+            'yyyy-mon-dd',
+            'yyyy.mon.dd',
+            'yyyy mon dd',
+            'yyyy/mon/dd',
+            'yyyy,mon dd',
+        ]:
             if d:
                 dt = parse(date)
                 std_format = str(dt.date())
@@ -791,7 +808,13 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'yyyy-dd-mon' or date_format == 'yyyy.dd.mon' or date_format == 'yyyy dd mon' or date_format == 'yyyy/dd/mon' or date_format == 'yyyy,dd mon':
+        elif date_format in [
+            'yyyy-dd-mon',
+            'yyyy.dd.mon',
+            'yyyy dd mon',
+            'yyyy/dd/mon',
+            'yyyy,dd mon',
+        ]:
             if e:
                 dt = parse(date)
                 std_format = str(dt.date())
@@ -800,7 +823,7 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'yyyy-mm-dd' or date_format == 'yyyy.mm.dd' or date_format == 'yyyy mm dd' or date_format == 'yyyy/mm/dd':
+        elif date_format in ['yyyy-mm-dd', 'yyyy.mm.dd', 'yyyy mm dd', 'yyyy/mm/dd']:
             if f:
                 f1 = f.string
                 year, month, date = re.split(r"[\s -/.]", f1)
@@ -810,7 +833,7 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'yyyy-dd-mm' or date_format == 'yyyy.dd.mm' or date_format == 'yyyy dd mm' or date_format == 'yyyy/dd/mm':
+        elif date_format in ['yyyy-dd-mm', 'yyyy.dd.mm', 'yyyy dd mm', 'yyyy/dd/mm']:
             if g:
                 g1 = g.string
                 year, date, month = re.split(r"[\s -/.]", g1)
@@ -820,7 +843,13 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'mon-dd-yyyy' or date_format == 'mon.dd.yyyy' or date_format == 'mon dd yyyy' or date_format == 'mon/dd/yyyy' or date_format == 'mon dd,yyyy':
+        elif date_format in [
+            'mon-dd-yyyy',
+            'mon.dd.yyyy',
+            'mon dd yyyy',
+            'mon/dd/yyyy',
+            'mon dd,yyyy',
+        ]:
             if h:
                 dt = parse(date)
                 std_format = str(dt.date())
@@ -829,7 +858,13 @@ class Validate:
                 print("Format does not match with the entered date and time.")
                 return False
 
-        elif date_format == 'mon-dd-yy' or date_format == 'mon.dd.yy' or date_format == 'mon dd yy' or date_format == 'mon/dd/yy' or date_format == 'mon dd,yy':
+        elif date_format in [
+            'mon-dd-yy',
+            'mon.dd.yy',
+            'mon dd yy',
+            'mon/dd/yy',
+            'mon dd,yy',
+        ]:
             if i:
                 dt = parse(date)
                 std_format = str(dt.date())
