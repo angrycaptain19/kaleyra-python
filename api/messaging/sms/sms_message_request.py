@@ -64,8 +64,7 @@ class SMSMessageRequest(KRequest):
 
         url = '{}&method={}'.format(BASEURL, SMSMessageRequest.CREDITS)
         response = Klient(url).response()
-        sms_message_response = SMSMessageResponse(response=response)
-        return sms_message_response
+        return SMSMessageResponse(response=response)
 
 
     def credit_usage(self):
@@ -82,8 +81,7 @@ class SMSMessageRequest(KRequest):
             to_date = Validate.date_validation(self.to_date, self.format)
             url = '{}&method={}&from={}&to={}'.format(BASEURL, SMSMessageRequest.USAGE, from_date, to_date)
             response = Klient(url).response()
-            sms_message_response = SMSMessageResponse(response=response)
-            return sms_message_response
+            return SMSMessageResponse(response=response)
 
 
     def delete(self):
@@ -98,8 +96,7 @@ class SMSMessageRequest(KRequest):
         url = '{}&groupid={}&task={}&method={}'.format(BASEURL, self.group_id, SMSMessageRequest.DELETE,
                                                        SMSMessageRequest.SCHEDULE)
         response = Klient(url).response()
-        sms_message_response = SMSMessageResponse(response=response)
-        return sms_message_response
+        return SMSMessageResponse(response=response)
 
 
     def edit(self):
@@ -117,8 +114,7 @@ class SMSMessageRequest(KRequest):
             url = '{}&groupid={}&time={}&task={}&method={}'.format(BASEURL, self.group_id, correct_time,
                                                                    SMSMessageRequest.MODIFY, SMSMessageRequest.SCHEDULE)
             response = Klient(url).response()
-            sms_message_response = SMSMessageResponse(response=response)
-            return sms_message_response
+            return SMSMessageResponse(response=response)
 
 
     def schedule(self):
@@ -206,5 +202,4 @@ class SMSMessageRequest(KRequest):
 
         url = '{}&method={}&id={}'.format(BASEURL, SMSMessageRequest.STATUS, self.id)
         response = Klient(url).response()
-        sms_message_response = SMSMessageResponse(response=response)
-        return sms_message_response
+        return SMSMessageResponse(response=response)
